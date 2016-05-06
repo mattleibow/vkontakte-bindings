@@ -5,7 +5,7 @@
         <version>1.0.0-beta1</version>
         <title>VK (originally VKontakte) is the largest European online social networking service.</title>
         <authors>VKontakte Ltd</authors>
-        <licenseUrl>https://raw.githubusercontent.com/mattleibow/vkontakte-bindings/v1.0.0-beta1/icons/icon_256x256.png</licenseUrl>
+        <licenseUrl>https://raw.githubusercontent.com/mattleibow/vkontakte-bindings/v1.0.0-beta1/LICENSE.txt</licenseUrl>
         <projectUrl>https://github.com/mattleibow/vkontakte-bindings</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/mattleibow/vkontakte-bindings/v1.0.0-beta1/icons/icon_256x256.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
