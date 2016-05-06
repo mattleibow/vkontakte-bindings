@@ -603,9 +603,9 @@ Task ("CI")
 Task("Default")
     .IsDependentOn("externals")
     .IsDependentOn("libs")
+    .IsDependentOn("DownloadArtifacts") // download late as each package is platform-specific
     .IsDependentOn("nuget")
     .IsDependentOn("component")
-    .IsDependentOn("DownloadArtifacts") // download late as each package is platform-specific
     .IsDependentOn("UploadArtifacts") // upload early so the other build can start
     .IsDependentOn("samples");
 
