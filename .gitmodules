@@ -1,0 +1,4 @@
+[submodule "externals/windows"]
+	path = externals/windows
+	url = https://github.com/VKCOM/vk-windowsphone-sdk.git
+	branch = master
