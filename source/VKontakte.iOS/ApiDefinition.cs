@@ -301,6 +301,28 @@ namespace VKontakte.API.Methods
 		[Field ("VK_API_REDIRECT_URI", "__Internal")]
 		NSString RedirectUri { get; }
 
+		// Documents
+
+		// extern NSString* const VK_API_DOC_ID;
+		[Field("VK_API_DOC_ID", "__Internal")]
+		NSString DocId { get; }
+
+		// extern NSString* const VK_API_ACCESS_KEY;
+		[Field("VK_API_ACCESS_KEY", "__Internal")]
+		NSString AccessKey { get; }
+
+		// extern NSString* const VK_API_FILE;
+		[Field("VK_API_FILE", "__Internal")]
+		NSString File { get; }
+
+		// extern NSString* const VK_API_TITLE;
+		[Field("VK_API_TITLE", "__Internal")]
+		NSString Title { get; }
+
+		// extern NSString* const VK_API_TAGS;
+		[Field("VK_API_TAGS", "__Internal")]
+		NSString Tags { get; }
+
 		// Photos
 
 		// extern NSString *const VK_API_PHOTO;
@@ -534,6 +556,53 @@ namespace VKontakte.API.Models
 		// -(NSDictionary *)serialize;
 		[Export ("serialize")]
 		NSDictionary Serialize ();
+	}
+
+	// @interface VKDocs : VKApiObject
+	[BaseType(typeof(VKApiObject))]
+	interface VKDocs
+	{
+		// @property (nonatomic, strong) NSNumber * id;
+		[Export("id", ArgumentSemantic.Strong)]
+		NSNumber id { get; set; }
+
+		// @property (nonatomic, strong) NSNumber * owner_id;
+		[Export("owner_id", ArgumentSemantic.Strong)]
+		NSNumber owner_id { get; set; }
+
+		// @property (copy, nonatomic) NSString * title;
+		[Export("title")]
+		string title { get; set; }
+
+		// @property (nonatomic, strong) NSNumber * size;
+		[Export("size", ArgumentSemantic.Strong)]
+		NSNumber size { get; set; }
+
+		// @property (copy, nonatomic) NSString * ext;
+		[Export("ext")]
+		string ext { get; set; }
+
+		// @property (copy, nonatomic) NSString * url;
+		[Export("url")]
+		string url { get; set; }
+
+		// @property (copy, nonatomic) NSString * photo_100;
+		[Export("photo_100")]
+		string photo_100 { get; set; }
+
+		// @property (copy, nonatomic) NSString * photo_130;
+		[Export("photo_130")]
+		string photo_130 { get; set; }
+
+		// @property (nonatomic, strong) NSNumber * date;
+		[Export("date", ArgumentSemantic.Strong)]
+		NSNumber date { get; set; }
+	}
+
+	// @interface VKDocsArray : VKApiObjectArray
+	[BaseType(typeof(VKApiObjectArray))]
+	interface VKDocsArray
+	{
 	}
 
 	// @interface VKApiObjectArray : VKApiObject <NSFastEnumeration>
@@ -1698,24 +1767,38 @@ namespace VKontakte.Core
 		[Export ("preventThisErrorsHandling", ArgumentSemantic.Copy)]
 		NSNumber[] PreventThisErrorsHandling { get; set; }
 
-//		// +(instancetype)requestWithMethod:(NSString *)method andParameters:(NSDictionary *)parameters andHttpMethod:(NSString *)httpMethod __attribute__((deprecated("")));
-//		[Static]
-//		[Export ("requestWithMethod:andParameters:andHttpMethod:")]
-//		VKRequest Create (string method, NSDictionary parameters, string httpMethod);
+		//// +(instancetype)requestWithMethod:(NSString *)method andParameters:(NSDictionary *)parameters andHttpMethod:(NSString *)httpMethod __attribute__((deprecated("")));
+		//[Obsolete]
+		//[Static]
+		//[Export ("requestWithMethod:andParameters:andHttpMethod:")]
+		//VKRequest Create (string method, [NullAllowed] NSDictionary parameters, string httpMethod);
 
-		// +(instancetype)requestWithMethod:(NSString *)method andParameters:(NSDictionary *)parameters;
+		//// +(instancetype)requestWithMethod:(NSString *)method andParameters:(NSDictionary *)parameters __attribute__((deprecated("")));
+		//[Obsolete]
+		//[Static]
+		//[Export ("requestWithMethod:andParameters:")]
+		//VKRequest Create (string method, [NullAllowed] NSDictionary parameters);
+
+		//// +(instancetype)requestWithMethod:(NSString *)method andParameters:(NSDictionary *)parameters modelClass:(Class)modelClass __attribute__((deprecated("")));
+		//[Obsolete]
+		//[Static]
+		//[Export ("requestWithMethod:andParameters:modelClass:")]
+		//VKRequest Create (string method, [NullAllowed] NSDictionary parameters, Class modelClass);
+
+		//// +(instancetype)requestWithMethod:(NSString *)method andParameters:(NSDictionary *)parameters andHttpMethod:(NSString *)httpMethod classOfModel:(Class)modelClass __attribute__((deprecated("")));
+		//[Obsolete]
+		//[Static]
+		//[Export ("requestWithMethod:andParameters:andHttpMethod:classOfModel:")]
+		//VKRequest Create (string method, [NullAllowed] NSDictionary parameters, string httpMethod, Class modelClass);
+
+		// +(instancetype)requestWithMethod:(NSString *)method parameters:(NSDictionary *)parameters;
 		[Static]
-		[Export ("requestWithMethod:andParameters:")]
+		[Export ("requestWithMethod:parameters:")]
 		VKRequest Create (string method, [NullAllowed] NSDictionary parameters);
 
-//		// +(instancetype)requestWithMethod:(NSString *)method andParameters:(NSDictionary *)parameters andHttpMethod:(NSString *)httpMethod classOfModel:(Class)modelClass __attribute__((deprecated("")));
-//		[Static]
-//		[Export ("requestWithMethod:andParameters:andHttpMethod:classOfModel:")]
-//		VKRequest Create (string method, NSDictionary parameters, string httpMethod, Class modelClass);
-
-		// +(instancetype)requestWithMethod:(NSString *)method andParameters:(NSDictionary *)parameters modelClass:(Class)modelClass;
+		// +(instancetype)requestWithMethod:(NSString *)method parameters:(NSDictionary *)parameters modelClass:(Class)modelClass;
 		[Static]
-		[Export ("requestWithMethod:andParameters:modelClass:")]
+		[Export ("requestWithMethod:parameters:modelClass:")]
 		VKRequest Create (string method, [NullAllowed] NSDictionary parameters, Class modelClass);
 
 		// +(instancetype)photoRequestWithPostUrl:(NSString *)url withPhotos:(NSArray *)photoObjects;
@@ -1772,16 +1855,12 @@ namespace VKontakte.API.Methods
 		string MethodGroup { get; }
 
 		// -(VKRequest *)prepareRequestWithMethodName:(NSString *)methodName andParameters:(NSDictionary *)methodParameters;
-		[Export ("prepareRequestWithMethodName:andParameters:")]
+		[Export ("prepareRequestWithMethodName:parameters:")]
 		VKRequest PrepareRequest (string methodName, NSDictionary methodParameters);
 
-		// -(VKRequest *)prepareRequestWithMethodName:(NSString *)methodName andParameters:(NSDictionary *)methodParameters andHttpMethod:(NSString *)httpMethod;
-		[Export ("prepareRequestWithMethodName:andParameters:andHttpMethod:")]
-		VKRequest PrepareRequest (string methodName, NSDictionary methodParameters, string httpMethod);
-
-		// -(VKRequest *)prepareRequestWithMethodName:(NSString *)methodName andParameters:(NSDictionary *)methodParameters andHttpMethod:(NSString *)httpMethod andClassOfModel:(Class)modelClass;
-		[Export ("prepareRequestWithMethodName:andParameters:andHttpMethod:andClassOfModel:")]
-		VKRequest PrepareRequest (string methodName, NSDictionary methodParameters, string httpMethod, Class modelClass);
+		// -(VKRequest *)prepareRequestWithMethodName:(NSString *)methodName andParameters:(NSDictionary *)methodParameters andClassOfModel:(Class)modelClass;
+		[Export ("prepareRequestWithMethodName:parameters:modelClass:")]
+		VKRequest PrepareRequest (string methodName, NSDictionary methodParameters, Class modelClass);
 	}
 
 	// @interface VKApiUsers : VKApiBase
@@ -1893,6 +1972,72 @@ namespace VKontakte.API.Methods
 		[Export ("getById:")]
 		VKRequest GetById (NSDictionary @params);
 	}
+
+	// @interface VKApiDocs : VKApiBase
+	[BaseType(typeof(VKApiBase))]
+	interface VKApiDocs
+	{
+		// -(VKRequest *)get;
+		[Export("get")]
+		VKRequest Get();
+
+		// -(VKRequest *)get:(NSInteger)count;
+		[Export("get:")]
+		VKRequest Get(nint count);
+
+		// -(VKRequest *)get:(NSInteger)count andOffset:(NSInteger)offset;
+		[Export("get:andOffset:")]
+		VKRequest Get(nint count, nint offset);
+
+		// -(VKRequest *)get:(NSInteger)count andOffset:(NSInteger)offset andOwnerID:(NSInteger)ownerID;
+		[Export("get:andOffset:andOwnerID:")]
+		VKRequest Get(nint count, nint offset, nint ownerID);
+
+		// -(VKRequest *)getByID:(NSArray *)IDs;
+		[Export("getByID:")]
+		VKRequest GetByID(NSNumber[] IDs);
+
+		// -(VKRequest *)getUploadServer;
+		[Export("getUploadServer")]
+		VKRequest UploadServer();
+
+		// -(VKRequest *)getUploadServer:(NSInteger)group_id;
+		[Export("getUploadServer:")]
+		VKRequest GetUploadServer(nint group_id);
+
+		// -(VKRequest *)getWallUploadServer;
+		[Export("getWallUploadServer")]
+		VKRequest WallUploadServer();
+
+		// -(VKRequest *)getWallUploadServer:(NSInteger)group_id;
+		[Export("getWallUploadServer:")]
+		VKRequest GetWallUploadServer(nint group_id);
+
+		// -(VKRequest *)save:(NSString *)file;
+		[Export("save:")]
+		VKRequest Save(string file);
+
+		// -(VKRequest *)save:(NSString *)file andTitle:(NSString *)title;
+		[Export("save:andTitle:")]
+		VKRequest Save(string file, string title);
+
+		// -(VKRequest *)save:(NSString *)file andTitle:(NSString *)title andTags:(NSString *)tags;
+		[Export("save:andTitle:andTags:")]
+		VKRequest Save(string file, string title, string tags);
+
+		// -(VKRequest *)delete:(NSInteger)ownerID andDocID:(NSInteger)docID;
+		[Export("delete:andDocID:")]
+		VKRequest Delete(nint ownerID, nint docID);
+
+		// -(VKRequest *)add:(NSInteger)ownerID andDocID:(NSInteger)docID;
+		[Export("add:andDocID:")]
+		VKRequest Add(nint ownerID, nint docID);
+
+		// -(VKRequest *)add:(NSInteger)ownerID andDocID:(NSInteger)docID andAccessKey:(NSString *)accessKey;
+		[Export("add:andDocID:andAccessKey:")]
+		VKRequest Add(nint ownerID, nint docID, string accessKey);
+	}
+
 }
 
 namespace VKontakte.Image
@@ -2315,17 +2460,42 @@ namespace VKontakte
 	[BaseType (typeof(VKObject))]
 	interface VKAuthorizationResult
 	{
-		// @property (nonatomic, strong) VKAccessToken * token;
+		// @property (readonly, nonatomic, strong) VKAccessToken * token;
+		[Export ("token", ArgumentSemantic.Strong)]
+		VKAccessToken Token { get; }
+
+		// @property (readonly, nonatomic, strong) VKUser * user;
+		[Export ("user", ArgumentSemantic.Strong)]
+		VKUser User { get; }
+
+		// @property (readonly, nonatomic, strong) NSError * error;
+		[Export ("error", ArgumentSemantic.Strong)]
+		NSError Error { get; }
+
+		// @property (readonly, assign, nonatomic) VKAuthorizationState state;
+		[Export ("state", ArgumentSemantic.Assign)]
+		VKAuthorizationState State { get; }
+	}
+
+	// @interface VKMutableAuthorizationResult : VKAuthorizationResult
+	[BaseType (typeof(VKAuthorizationResult))]
+	interface VKMutableAuthorizationResult
+	{
+		// @property (readwrite, nonatomic, strong) VKAccessToken * token;
 		[Export ("token", ArgumentSemantic.Strong)]
 		VKAccessToken Token { get; set; }
 
-		// @property (nonatomic, strong) VKUser * user;
+		// @property (readwrite, nonatomic, strong) VKUser * user;
 		[Export ("user", ArgumentSemantic.Strong)]
 		VKUser User { get; set; }
 
-		// @property (nonatomic, strong) NSError * error;
+		// @property (readwrite, nonatomic, strong) NSError * error;
 		[Export ("error", ArgumentSemantic.Strong)]
 		NSError Error { get; set; }
+
+		// @property (assign, readwrite, nonatomic) VKAuthorizationState state;
+		[Export ("state", ArgumentSemantic.Assign)]
+		VKAuthorizationState State { get; set; }
 	}
 }
 
@@ -2405,6 +2575,10 @@ namespace VKontakte
 		// extern NSString *const VK_PER_EMAIL;
 		[Field ("VK_PER_EMAIL", "__Internal")]
 		NSString Email { get; }
+
+		// extern NSString *const VK_PER_EMAIL;
+		[Field ("VK_PER_MARKET", "__Internal")]
+		NSString Market { get; }
 	}
 }
 
@@ -2609,6 +2783,10 @@ namespace VKontakte
 		[Export ("vkSdkUserAuthorizationFailed")]
 		void UserAuthorizationFailed ();
 
+		// @optional -(void)vkSdkAuthorizationStateUpdatedWithResult:(VKAuthorizationResult*)result;
+		[Export ("vkSdkAuthorizationStateUpdatedWithResult:")]
+		void AuthorizationStateUpdated (VKAuthorizationResult result);
+
 		// @optional -(void)vkSdkAccessTokenUpdated:(VKAccessToken *)newToken oldToken:(VKAccessToken *)oldToken;
 		[Export ("vkSdkAccessTokenUpdated:oldToken:")]
 		void AccessTokenUpdated (VKAccessToken newToken, VKAccessToken oldToken);
@@ -2667,6 +2845,11 @@ namespace VKontakte
 		[Static]
 		[Export ("instance")]
 		VKSdk Instance { get; }
+
+		// +(BOOL)initialized;
+		[Static]
+		[Export("initialized")]
+		bool Initialized { get; }
 
 		// +(instancetype)initializeWithAppId:(NSString *)appId;
 		[Static]
@@ -2785,6 +2968,32 @@ namespace VKontakte
 
 namespace VKontakte.Views
 {
+	// @interface VKAuthorizationContext : VKObject
+	[BaseType (typeof(VKObject))]
+	interface VKAuthorizationContext
+	{
+		// @property (readonly, nonatomic, strong) NSString * clientId;
+		[Export("clientId", ArgumentSemantic.Strong)]
+		string ClientId { get; }
+
+		// @property (readonly, nonatomic, strong) NSString * displayType;
+		[Export("displayType", ArgumentSemantic.Strong)]
+		string DisplayType { get; }
+
+		// @property (readonly, nonatomic, strong) NSArray<NSString *> * scope;
+		[Export("scope", ArgumentSemantic.Strong)]
+		string[] Scope { get; }
+
+		// @property (readonly, nonatomic) BOOL revoke;
+		[Export("revoke")]
+		bool Revoke { get; }
+
+		// +(instancetype)contextWithAuthType:(VKAuthorizationType)authType clientId:(NSString *)clientId displayType:(NSString *)displayType scope:(NSArray<NSString *> *)scope revoke:(BOOL)revoke;
+		[Static]
+		[Export("contextWithAuthType:clientId:displayType:scope:revoke:")]
+		VKAuthorizationContext Create (VKAuthorizationType authType, string clientId, string displayType, string[] scope, bool revoke);
+	}
+
 	// @interface VKAuthorizeController : UIViewController <UIWebViewDelegate>
 	[BaseType (typeof(UIViewController))]
 	interface VKAuthorizeController : IUIWebViewDelegate
@@ -2799,10 +3008,10 @@ namespace VKontakte.Views
 		[Export ("presentForValidation:")]
 		void PresentForValidation (VKError validationError);
 
-		// +(NSURL *)buildAuthorizationURL:(NSString *)prefix redirectUri:(NSString *)redirectUri clientId:(NSString *)clientId scope:(NSString *)scope revoke:(BOOL)revoke display:(NSString *)display;
+		// +(NSURL *)buildAuthorizationURLWithContext:(VKAuthorizationContext *)ctx;
 		[Static]
-		[Export ("buildAuthorizationURL:redirectUri:clientId:scope:revoke:display:")]
-		NSUrl BuildAuthorizationUrl (string prefix, string redirectUri, string clientId, string scope, bool revoke, string display);
+		[Export("buildAuthorizationURLWithContext:")]
+		NSUrl BuildAuthorizationUrl (VKAuthorizationContext ctx);
 	}
 }
 

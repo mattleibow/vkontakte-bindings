@@ -91,4 +91,12 @@ namespace VKontakte.Views
 		Cancelled,
 		Done
 	}
+
+	[Native]
+	public enum VKAuthorizationType : ulong
+	{
+		WebView,
+		Safari,
+		App
+	}
 }
