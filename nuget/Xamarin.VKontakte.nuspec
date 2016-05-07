@@ -2,12 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Xamarin.VKontakte</id>
-        <version>1.0.0-beta2</version>
+        <version>1.0.0</version>
         <title>VK (originally VKontakte)</title>
         <authors>VKontakte Ltd</authors>
-        <licenseUrl>https://raw.githubusercontent.com/mattleibow/vkontakte-bindings/v1.0.0-beta2/LICENSE.txt</licenseUrl>
+        <licenseUrl>https://raw.githubusercontent.com/mattleibow/vkontakte-bindings/v1.0.0/LICENSE.txt</licenseUrl>
         <projectUrl>https://github.com/mattleibow/vkontakte-bindings</projectUrl>
-        <iconUrl>https://raw.githubusercontent.com/mattleibow/vkontakte-bindings/v1.0.0-beta2/icons/icon_256x256.png</iconUrl>
+        <iconUrl>https://raw.githubusercontent.com/mattleibow/vkontakte-bindings/v1.0.0/icons/icon_256x256.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>VK (originally VKontakte) is the largest European online social networking service. It is available in several languages, but is especially popular among Russian-speaking users.</description>
         <summary>VK (originally VKontakte) is the largest European online social networking service.</summary>
