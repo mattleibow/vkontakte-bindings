@@ -60,8 +60,6 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
     <TransformFile Include="Transforms\Metadata.xml" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
-  <ItemGroup />
   <ItemGroup>
     <LibraryProjectZip Include="..\..\externals\android\vk.aar">
       <Link>Jars\vk.aar</Link>
@@ -69,10 +67,5 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\packages\Xamarin.Android.Bindings.Generators.1.0.0.16\build\MonoAndroid\Xamarin.Android.Bindings.Generators.targets" Condition="Exists('..\packages\Xamarin.Android.Bindings.Generators.1.0.0.16\build\MonoAndroid\Xamarin.Android.Bindings.Generators.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Xamarin.Android.Bindings.Generators.1.0.0.16\build\MonoAndroid\Xamarin.Android.Bindings.Generators.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Bindings.Generators.1.0.0.16\build\MonoAndroid\Xamarin.Android.Bindings.Generators.targets'))" />
-  </Target>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
 </Project>

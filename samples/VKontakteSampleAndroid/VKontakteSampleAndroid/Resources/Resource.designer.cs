@@ -2408,8 +2408,8 @@ namespace VKontakteSampleAndroid
 			// aapt resource value: 0x7f05007e
 			public const int Animation_AppCompat_DropDownUp = 2131034238;
 			
-			// aapt resource value: 0x7f050130
-			public const int AppTheme = 2131034416;
+			// aapt resource value: 0x7f050131
+			public const int AppTheme = 2131034417;
 			
 			// aapt resource value: 0x7f05007f
 			public const int Base_AlertDialog_AppCompat = 2131034239;
@@ -2825,14 +2825,14 @@ namespace VKontakteSampleAndroid
 			// aapt resource value: 0x7f050071
 			public const int Base_Widget_AppCompat_Toolbar_Button_Navigation = 2131034225;
 			
-			// aapt resource value: 0x7f050132
-			public const int Button = 2131034418;
-			
 			// aapt resource value: 0x7f050133
-			public const int Container = 2131034419;
+			public const int Button = 2131034419;
 			
-			// aapt resource value: 0x7f050131
-			public const int LoginFormContainer = 2131034417;
+			// aapt resource value: 0x7f050134
+			public const int Container = 2131034420;
+			
+			// aapt resource value: 0x7f050132
+			public const int LoginFormContainer = 2131034418;
 			
 			// aapt resource value: 0x7f050010
 			public const int Platform_AppCompat = 2131034128;
@@ -3121,6 +3121,9 @@ namespace VKontakteSampleAndroid
 			
 			// aapt resource value: 0x7f05012f
 			public const int VK_Transparent = 2131034415;
+			
+			// aapt resource value: 0x7f050130
+			public const int VKAlertDialog = 2131034416;
 			
 			// aapt resource value: 0x7f0500ed
 			public const int Widget_AppCompat_ActionBar = 2131034349;
