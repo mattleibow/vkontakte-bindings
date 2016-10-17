@@ -1,9 +1,9 @@
-#tool nuget:?package=XamarinComponent
+#tool nuget:https://nuget.org/api/v2/?package=XamarinComponent
 
-#addin nuget:?package=Octokit
-#addin nuget:?package=Cake.Xamarin
-#addin nuget:?package=Cake.XCode
-#addin nuget:?package=Cake.FileHelpers
+#addin nuget:https://nuget.org/api/v2/?package=Octokit&version=0.20.0
+#addin nuget:https://nuget.org/api/v2/?package=Cake.Xamarin
+#addin nuget:https://nuget.org/api/v2/?package=Cake.XCode
+#addin nuget:https://nuget.org/api/v2/?package=Cake.FileHelpers
 
 using System.Net;
 using System.Text.RegularExpressions;
@@ -227,10 +227,15 @@ var DownloadPod = new Action<DirectoryPath, string, string, IDictionary<string, 
         var builder = new StringBuilder ();
         builder.AppendFormat ("platform :{0}, '{1}'", platform, platformVersion);
         builder.AppendLine ();
+        if (CocoaPodVersion (new CocoaPodSettings ()) >= new System.Version (1, 0)) {
+            builder.AppendLine ("install! 'cocoapods', :integrate_targets => false");
+        }
+        builder.AppendLine ("target 'Xamarin' do");
         foreach (var pod in pods) {
-            builder.AppendFormat ("pod '{0}', '{1}'", pod.Key, pod.Value);
+            builder.AppendFormat ("  pod '{0}', '{1}'", pod.Key, pod.Value);
             builder.AppendLine ();
         }
+        builder.AppendLine ("end");
         
         if (!DirectoryExists (podfilePath)) {
             CreateDirectory (podfilePath);
@@ -238,9 +243,7 @@ var DownloadPod = new Action<DirectoryPath, string, string, IDictionary<string, 
         
         System.IO.File.WriteAllText (podfilePath.CombineWithFilePath ("Podfile").ToString (), builder.ToString ());
 	
-        CocoaPodInstall (podfilePath, new CocoaPodInstallSettings {
-            NoIntegrate = true
-        });
+        CocoaPodInstall (podfilePath);
     }
 });
 var CreateStaticPod = new Action<DirectoryPath, string, string, string, string, string> ((path, osxVersion, iosVersion, tvosVersion, name, version) => {

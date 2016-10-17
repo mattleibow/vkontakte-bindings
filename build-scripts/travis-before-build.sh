@@ -3,8 +3,8 @@
 #
 # Variables
 #
-export MonoVersion=4.3.2
-export MonoTouchVersion=9.4.2.27
+export MonoVersion=4.6.1.5
+export MonoTouchVersion=10.0.1.10
 export ActivatorVersion=1.0.1
 
 #
