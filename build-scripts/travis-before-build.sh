@@ -3,6 +3,7 @@
 #
 # Variables
 #
+export MonoVersionShort=4.6.1
 export MonoVersion=4.6.1.5
 export MonoTouchVersion=10.0.1.10
 export ActivatorVersion=1.0.1
@@ -51,7 +52,7 @@ cp ./build-scripts/iOSDeveloper.mobileprovision ~/Library/MobileDevice/Provision
 # Download and install Mono and Xamarin.iOS
 #
 echo Download and install Mono and Xamarin.iOS
-wget -nc -P downloads "http://download.mono-project.com/archive/${MonoVersion}/macos-10-universal/MonoFramework-MDK-${MonoVersion}.macos10.xamarin.universal.pkg"
+wget -nc -P downloads "http://download.mono-project.com/archive/${MonoVersionShort}/macos-10-universal/MonoFramework-MDK-${MonoVersion}.macos10.xamarin.universal.pkg"
 sudo installer -pkg "downloads/MonoFramework-MDK-${MonoVersion}.macos10.xamarin.universal.pkg" -target / 
 wget -nc -P downloads "http://download.xamarin.com/MonoTouch/Mac/monotouch-${MonoTouchVersion}.pkg"
 sudo installer -pkg "downloads/monotouch-${MonoTouchVersion}.pkg" -target /
